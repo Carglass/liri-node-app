@@ -1,7 +1,9 @@
 require("dotenv").config();
 var keys = require("./keys");
 var Spotify = require("node-spotify-api");
+var Twitter = require("twitter");
 var spotify = new Spotify(keys.spotify);
+var client = new Twitter(keys.twitter);
 var fs = require("fs");
 //var client = new Twitter(keys.twitter);
 var request = require("request");
@@ -10,6 +12,22 @@ var command = process.argv[2];
 var inputData;
 if (process.argv[3]) {
   inputData = process.argv[3].replace(/ /g, "_");
+}
+
+function liriTwitter() {
+  var params = { screen_name: "nodejs" };
+  client.get("statuses/user_timeline", params, function(
+    error,
+    tweets,
+    response
+  ) {
+    if (!error) {
+      for (let i = 0; i < 20; i++) {
+        console.log(tweets[i].created_at);
+        console.log(tweets[i].text);
+      }
+    }
+  });
 }
 
 function liriSpotify(song) {
@@ -110,6 +128,7 @@ function liriRandom() {
 
 function execCommand(commandInput, input) {
   if (commandInput === "my-tweets") {
+    liriTwitter();
   } else if (commandInput === "spotify-this-song") {
     liriSpotify(input);
   } else if (commandInput === "movie-this") {
