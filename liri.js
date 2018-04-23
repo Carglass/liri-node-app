@@ -38,9 +38,9 @@ function liriMovie(movie) {
   request(
     "http://www.omdbapi.com/?apikey=" + keys.omdb.key + "&t=" + movie,
     function(error, response, body) {
-      if (error) {
+      if (JSON.parse(body).Response === "False") {
         request(
-          "http://www.omdbapi.com/?apikey=" + keys.omdb.key + "&t=mrnobody",
+          "http://www.omdbapi.com/?apikey=" + keys.omdb.key + "&t=mr_nobody",
           function(error, response, body) {
             // TODO: it seems it does not return an error when it finds nothing...
             console.log(JSON.parse(body).Title);
@@ -67,6 +67,7 @@ function liriMovie(movie) {
           }
         );
       } else {
+        console.log(JSON.parse(body));
         console.log(JSON.parse(body).Title);
         console.log(JSON.parse(body).Year);
         console.log(
