@@ -2,7 +2,7 @@
 
 a simple node application to retrieve information on social media
 
-####First you will need to configure the application with your profiles using the `dot-env` package
+#### First you will need to configure the application with your profiles using the `dot-env` package
 
 The application takes in a first argument to select the function that you want to use:
 
