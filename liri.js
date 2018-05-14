@@ -61,6 +61,8 @@ function liriMovie(movie) {
           "http://www.omdbapi.com/?apikey=" + keys.omdb.key + "&t=mr_nobody",
           function(error, response, body) {
             // TODO: it seems it does not return an error when it finds nothing...
+
+            //just a test
             console.log(JSON.parse(body).Title);
             console.log(JSON.parse(body).Year);
             console.log(
